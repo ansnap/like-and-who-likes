@@ -237,6 +237,8 @@ class Who_Likes {
 
 	private function add_user_like( $id ) {
 		$userId = get_current_user_id();
+		
+		do_action('user_like_added', $id, $userId);
 
 		/* Add to the total likes for this activity. */
 		$liked_users = $this->get_likes( $id );
@@ -252,6 +254,8 @@ class Who_Likes {
 	private function remove_user_like( $id ) {
 		$userId = get_current_user_id();
 
+		do_action('user_like_removed', $id, $userId);
+		
 		/* Get likes except user's */
 		$liked_users = array_diff( $this->get_likes( $id ), [ $userId ] );
 
